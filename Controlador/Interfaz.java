@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import Modelo.Conexion;
+import Vista.MantenimientoPaciente;
+import Vista.Menu;
 
 public class Interfaz extends JFrame implements ActionListener {
 
@@ -19,7 +22,6 @@ public class Interfaz extends JFrame implements ActionListener {
     }
 
     private void comp() {
-        
         JLabel Inicio = new JLabel("Bienvenido al sistema de citas");
         Inicio.setBounds(225, 100, 600, 50);
         Inicio.setForeground(Color.WHITE);
@@ -31,7 +33,6 @@ public class Interfaz extends JFrame implements ActionListener {
         Encabezado.setForeground(Color.WHITE);
         Encabezado.setFont(new Font("Roboto", Font.BOLD, 17));
         add(Encabezado);
-        
         
         JLabel usuarioLabel = new JLabel("Usuario:");
         usuarioLabel.setForeground(Color.WHITE);
@@ -62,21 +63,32 @@ public class Interfaz extends JFrame implements ActionListener {
         add(botonIngresar);
         botonIngresar.addActionListener(this);
         
-        // Panel
         JPanel fondo = new JPanel();
         fondo.setBackground(new java.awt.Color(42, 94, 166));
         fondo.setSize(900, 650);
         fondo.setLocation(0, 0);
         fondo.setVisible(true);
         add(fondo);
-        
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-        if (e.getSource() == botonIngresar) {
-        }
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == botonIngresar) {
+
+            String usuario = usuarioField.getText();
+            String clave = new String(claveField.getPassword());
+            Conexion conexion = new Conexion();
+            
+            if (conexion.validarUsuario(usuario, clave)) {
+                MantenimientoPaciente menu = new MantenimientoPaciente();
+                menu.setVisible(true);
+                this.dispose();
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 }

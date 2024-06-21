@@ -10,10 +10,8 @@ public class MantenimientoPaciente extends JFrame implements ActionListener {
     private JButton insertarButton, actualizarButton, eliminarButton, consultarButton;
 
     public MantenimientoPaciente() {
-
         configurarVentana();
         inicializarComponentes();
-
     }
 
     private void configurarVentana() {
@@ -105,19 +103,16 @@ public class MantenimientoPaciente extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == insertarButton) {
-           
+            // Implementar lógica de inserción
         }
-
         if (e.getSource() == actualizarButton) {
-           
+            // Implementar lógica de actualización
         }
-
         if (e.getSource() == eliminarButton) {
-            
+            // Implementar lógica de eliminación
         }
-
         if (e.getSource() == consultarButton) {
-            
+            // Implementar lógica de consulta
         }
     }
 }

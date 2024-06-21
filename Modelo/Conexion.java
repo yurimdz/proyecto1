@@ -1,35 +1,42 @@
 package Modelo;
 
 import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Conexion {
 
-    // Declarar los objetos JDBC.
     private Connection con = null;
-    private Statement stmt = null;
-    private ResultSet rs = null;
 
     public Conexion() {
         try {
             // Registrar el controlador JDBC
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
+
             // Establecer la conexión.
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/matricula?verifyServerCertificate=false&useSSL=true", "root", "filadelfia26");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistema_pacientes", "root", "filadelfia26");
             con.setAutoCommit(true);
-            
+
             System.out.println("Conexión exitosa...");
-
         } catch (SQLException | ClassNotFoundException e) {
-
             e.printStackTrace();
-
-        } finally {
-            
-            // Cerrar recursos
-            if (rs != null) try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
-            if (stmt != null) try { stmt.close(); } catch (Exception e) { e.printStackTrace(); }
-            if (con != null) try { con.close(); } catch (Exception e) { e.printStackTrace(); }
         }
+    }
+
+    public boolean validarUsuario(String usuario, String clave) {
+        String query = "SELECT * FROM usuarios WHERE login=yuri AND clave=1234";
+        try (PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, usuario);
+            pst.setString(2, clave);
+            ResultSet rs = pst.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Connection getConnection() {
+        return con;
     }
 }

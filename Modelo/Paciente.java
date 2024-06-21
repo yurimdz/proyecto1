@@ -5,7 +5,6 @@ public class Paciente {
     private String nombre, cedula, edad, contacto, residencia, fecha, hora;
 
     public Paciente(String nombre, String cedula, String edad, String contacto, String residencia, String fecha, String hora) {
-        
         this.nombre = nombre;
         this.cedula = cedula;
         this.edad = edad;
@@ -13,7 +12,6 @@ public class Paciente {
         this.residencia = residencia;
         this.fecha = fecha;
         this.hora = hora;
-
     }
 
     public String getNombre() { return nombre; }
@@ -23,5 +21,4 @@ public class Paciente {
     public String getResidencia() { return residencia; }
     public String getFecha() { return fecha; }
     public String getHora() { return hora; }
-
 }

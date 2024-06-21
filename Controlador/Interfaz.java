@@ -1,13 +1,10 @@
 package Controlador;
 
-import Modelo.DataBaseConnection;
-import Vista.Menu;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.sql.*;
 import javax.swing.border.BevelBorder;
 
 public class Interfaz extends JFrame implements ActionListener {
@@ -79,38 +76,7 @@ public class Interfaz extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if (e.getSource() == botonIngresar) {
-            
-            String usuario = usuarioField.getText();
-            String clave = new String(claveField.getPassword());
-            
-            if (validarCredenciales(usuario, clave)) {
-                Menu menu = new Menu();
-                menu.setVisible(true);
-                this.dispose();
-                
-            } else {
-                
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
         }
     }
 
-    private boolean validarCredenciales(String usuario, String clave) {
-        
-        try (Connection con = DataBaseConnection.getConnection()) {
-            
-            String query = "SELECT * FROM usuarios WHERE login = yurimdz AND clave = filadelfia26";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, usuario);
-            ps.setString(2, clave);
-            ResultSet rs = ps.executeQuery();
-            return rs.next();
-            
-        } catch (SQLException e) {
-            
-            e.printStackTrace();
-            return false;
-            
-        }
-    }
 }
